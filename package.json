@@ -1,0 +1,17 @@
+{
+  "dependencies": {
+    "pg": "^8.13.1"
+  }
+}
+
+{
+  "name": "nombre-de-tu-aplicacion",
+  "version": "1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js", // Asegúrate de tener este script
+    "heroku-postbuild": "cd client && npm install && npm run build" // Para construir el frontend
+  },
+  ...
+}
+

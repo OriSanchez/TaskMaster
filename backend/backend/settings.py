@@ -12,6 +12,16 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 import os
+import ssl
+import certifi
+
+# Obtener la ruta correcta de los certificados
+CERT_PATH = certifi.where()  # O usa la ruta manual si es necesario
+
+os.environ["SSL_CERT_FILE"] = CERT_PATH
+ssl._create_default_https_context = ssl.create_default_context(cafile=CERT_PATH)
+
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -83,7 +93,6 @@ CORS_ALLOWED_ORIGINS = [
 ]
 
 CORS_ALLOW_CREDENTIALS = True
-#CORS_ALLOW_ALL_ORIGINS = True  # Para desarrollo, permite todas las conexiones
 
 CSRF_TRUSTED_ORIGINS = [
     'http://localhost:3000',  # Ajusta la URL según sea necesario
@@ -180,14 +189,15 @@ ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 3
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'taskm386@gmail.com'  # Cambia esto por tu dirección de correo
-EMAIL_HOST_PASSWORD = 'dxfj ehvu qekc gefw'  # Cambia esto por tu contraseña de correo
-DEFAULT_FROM_EMAIL = 'taskm386@gmail.com'
+EMAIL_USE_TLS = False
+EMAIL_USE_SSL = True
+EMAIL_PORT = 465
+EMAIL_HOST_USER = 'taskm386@gmail.com' 
+EMAIL_HOST_PASSWORD = 'jant gcqx vlch cnbu'  
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER 
 
-# Opcional: configuraciones de prueba (cambia a False en producción)
-EMAIL_USE_SSL = False
+
+
 
 
 
